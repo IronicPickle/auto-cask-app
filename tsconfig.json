@@ -1,3 +1,27 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@screens/*": ["./components/screens/*"],
+      "@components/*": ["./components/*"],
+      "@hooks/*": ["./hooks/*"],
+
+      "@lib/*": ["./lib/*"],
+      "@utils/*": ["./lib/utils/*"],
+      "@ts/*": ["./lib/ts/*"],
+      "@enums/*": ["./lib/enums/*"],
+      "@constants/*": ["./lib/constants/*"],
+
+      "@config/*": ["./config/*"],
+      "@api/*": ["./api/*"],
+
+      "@images/*": ["./media/images/*"],
+      "@media/*": ["./media/*"],
+
+      "@src/*": ["./*"],
+
+      "@shared/*": ["../../auto-cask-shared/*"]
+    }
+  }
 }
