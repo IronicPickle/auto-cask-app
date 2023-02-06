@@ -3,10 +3,12 @@ import type Validator from "@shared/utils/Validator";
 import type { ValidationErrors } from "@shared/ts/api/generic";
 import { isBoolean } from "@shared/utils/generic";
 import { useState } from "react";
+import { RequestRes } from "@api/hooks/useRequest";
+import { GenericErrorCode } from "@shared/enums/api/generic";
 
 export default <IS extends object>(
   initialValues: IS,
-  handle: (values: IS) => void,
+  handle: (values: IS) => Promise<RequestRes<any, any> | void>,
   getValidators?: (values: IS) => {
     [N in keyof IS]?: Validator;
   },
@@ -43,13 +45,21 @@ export default <IS extends object>(
   };
 
   const validateAll = () => {
-    for (const name of Object.keys(values) as Array<keyof IS>) validate(name);
+    let failed = false;
+    for (const name of Object.keys(values) as Array<keyof IS>) {
+      const { failed: validateFailed } = validate(name) ?? {};
+      if (validateFailed) failed = true;
+    }
+    return failed;
   };
 
-  const onSubmit = () => {
-    validateAll();
-    const failed = validation.failed;
-    if (!failed) handle(values);
+  const onSubmit = async () => {
+    const failed = validateAll();
+    if (!failed) {
+      const res = await handle(values);
+      const { error } = res ?? {};
+      if (error?.errorCode === GenericErrorCode.ValidationError) setValidation(error.validation);
+    }
     return !failed;
   };
 

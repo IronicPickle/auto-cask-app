@@ -2,9 +2,9 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
-import Home from "@screens/bottomTabs/Home";
-import Organisations from "@screens/bottomTabs/Organisations";
-import Profile from "@screens/bottomTabs/Profile";
+import Home from "@screens/bottomTabs/home/Home";
+import Organisations from "@screens/bottomTabs/organisations/Organisations";
+import Profile from "@screens/bottomTabs/profile/Profile";
 
 export type BottomTabsParamList = {
   Home: undefined;

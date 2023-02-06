@@ -2,8 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
-import Login from "@screens/authStack/Login";
-import Register from "@screens/authStack/Register";
+import Login from "@screens/authStack/login/Login";
+import Register from "@screens/authStack/register/Register";
 
 export type AuthStackParamList = {
   Login: undefined;

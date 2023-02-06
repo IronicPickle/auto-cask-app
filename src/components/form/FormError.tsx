@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: colors.red,
-    fontSize: 24,
+    fontSize: 22,
   },
 
   text: {
     color: colors.red,
-    fontSize: 16,
+    fontSize: 14,
   },
 });
