@@ -16,11 +16,11 @@ import { useAuthStackNavigator } from "@src/AuthStackNavigator";
 import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 
 const LoginForm = () => {
-  const { userIsLoading, userError } = useGlobalContext();
+  const { self } = useGlobalContext();
 
   const navigator = useAuthStackNavigator();
 
-  const { send: login, isLoading: loginIsLoading, error: loginError } = useLogin();
+  const login = useLogin(undefined);
 
   const { values, validation, onChange, onSubmit } = useForm(
     {
@@ -28,7 +28,7 @@ const LoginForm = () => {
       password: "",
     },
     async (): Promise<any> => {
-      const res = await login(values);
+      const res = await login.send(values);
       const { data: tokens } = res;
       if (tokens) storageManager.set("session", tokens);
       return res;
@@ -36,8 +36,8 @@ const LoginForm = () => {
     authValidators.login,
   );
 
-  const isLoading = loginIsLoading || userIsLoading;
-  const error = loginError ?? userError;
+  const isLoading = login.isLoading || self.isLoading;
+  const error = login.error ?? self.error;
 
   return (
     <View style={styles.wrapper}>

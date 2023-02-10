@@ -63,5 +63,5 @@ export default <IS extends object>(
     return !failed;
   };
 
-  return { values, validation, onChange, onSubmit };
+  return { values, validation, onChange, onSubmit, setValues };
 };

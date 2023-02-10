@@ -1,13 +1,12 @@
 import { colors } from "@lib/constants/colors";
 import { UIColor } from "@lib/ts/generic";
-import { cloneElement, PropsWithChildren } from "react";
-import { ActivityIndicator, Pressable, StyleProp, StyleSheet, Text, TextProps } from "react-native";
+import { cloneElement } from "react";
+import { ActivityIndicator, Pressable, StyleProp, StyleSheet } from "react-native";
 import { PressableProps } from "react-native/Libraries/Components/Pressable/Pressable";
-import { TextStyle, ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
+import { ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
 
 interface Props {
   color?: UIColor;
-  textColor?: UIColor;
   iconColor?: UIColor;
 
   variant?: "contained" | "outlined" | "flat";
@@ -18,23 +17,19 @@ interface Props {
   disabled?: boolean;
   isLoading?: boolean;
 
-  startIcon?: JSX.Element;
-  endIcon?: JSX.Element;
+  icon?: JSX.Element;
 
   style?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<TextStyle>;
 
   pressableProps?: PressableProps;
-  textProps?: TextProps;
 
   onPress?: PressableProps["onPress"];
 }
 
-const Button = (props: PropsWithChildren<Props>) => {
+const IconButton = (props: Props) => {
   const {
     color = "black",
-    textColor = "white",
-    iconColor = textColor,
+    iconColor = "white",
 
     variant = "contained",
     size = "medium",
@@ -44,21 +39,16 @@ const Button = (props: PropsWithChildren<Props>) => {
     disabled,
     isLoading,
 
-    startIcon,
-    endIcon,
+    icon,
 
     style,
-    textStyle,
 
     pressableProps,
-    textProps,
 
     onPress,
-
-    children,
   } = props;
 
-  const styles = createStyles(color, textColor, iconColor, size, variant, rounded);
+  const styles = createStyles(color, iconColor, size, variant, rounded);
 
   return (
     <Pressable
@@ -67,30 +57,22 @@ const Button = (props: PropsWithChildren<Props>) => {
       onPress={onPress}
       {...pressableProps}
     >
-      {startIcon &&
-        cloneElement(startIcon, {
-          style: [styles.icon, startIcon.props.style],
-        })}
-      <Text style={[styles.text, textStyle]} {...textProps}>
-        {children}
-      </Text>
       {isLoading ? (
         <ActivityIndicator color={colors[iconColor]} size={styles.icon.fontSize} />
       ) : (
-        endIcon &&
-        cloneElement(endIcon, {
-          style: [styles.icon, endIcon.props.style],
+        icon &&
+        cloneElement(icon, {
+          style: [styles.icon, icon.props.style],
         })
       )}
     </Pressable>
   );
 };
 
-export default Button;
+export default IconButton;
 
 const createStyles = (
   color: UIColor,
-  textColor: UIColor,
   iconColor: UIColor,
   size: Props["size"] = "medium",
   variant: Props["variant"] = "contained",
@@ -110,15 +92,10 @@ const createStyles = (
       borderStyle: "solid",
       borderWidth: 2,
 
-      ...(rounded ? { borderRadius: 100 } : {}),
-
       ...sizeStyles.pressable,
       ...variantStyles.pressable,
-    },
-    text: {
-      color: colors[textColor],
-      ...sizeStyles.text,
-      ...variantStyles.text,
+
+      ...(rounded ? { borderRadius: 100 } : {}),
     },
     icon: {
       color: colors[iconColor],
@@ -133,80 +110,60 @@ const createSizeStyles = () => ({
     pressable: {
       gap: 5,
 
-      paddingHorizontal: 8,
-      paddingVertical: 4,
+      padding: 3,
 
       borderRadius: 3,
     },
-    text: {
-      fontSize: 10,
-    },
     icon: {
-      fontSize: 12,
+      fontSize: 13,
     },
   }),
   small: StyleSheet.create({
     pressable: {
       gap: 8,
 
-      paddingHorizontal: 12,
-      paddingVertical: 8,
+      padding: 6,
 
       borderRadius: 4,
     },
-    text: {
-      fontSize: 12,
-    },
     icon: {
-      fontSize: 14,
+      fontSize: 16,
     },
   }),
   medium: StyleSheet.create({
     pressable: {
       gap: 12,
 
-      paddingHorizontal: 16,
-      paddingVertical: 10,
+      padding: 8,
 
       borderRadius: 5,
     },
-    text: {
-      fontSize: 16,
-    },
     icon: {
-      fontSize: 18,
+      fontSize: 20,
     },
   }),
   large: StyleSheet.create({
     pressable: {
       gap: 16,
 
-      paddingHorizontal: 24,
-      paddingVertical: 14,
+      padding: 10,
 
       borderRadius: 6,
     },
-    text: {
-      fontSize: 20,
-    },
     icon: {
-      fontSize: 22,
+      fontSize: 26,
     },
   }),
   "extra-large": StyleSheet.create({
     pressable: {
       gap: 24,
 
-      paddingHorizontal: 36,
-      paddingVertical: 24,
+      padding: 16,
 
       borderRadius: 8,
     },
-    text: {
-      fontSize: 24,
-    },
     icon: {
-      fontSize: 26,
+      fontSize: 40,
     },
   }),
 });
@@ -217,21 +174,18 @@ const createVariantStyles = (color: UIColor) => ({
       borderColor: colors[color],
       backgroundColor: colors[color],
     },
-    text: {},
     icon: {},
   }),
   outlined: StyleSheet.create({
     pressable: {
       borderColor: colors[color],
     },
-    text: {},
     icon: {},
   }),
   flat: StyleSheet.create({
     pressable: {
       borderColor: "transparent",
     },
-    text: {},
     icon: {},
   }),
 });

@@ -17,11 +17,11 @@ import useRegister from "@api/auth/hooks/useRegister";
 import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 
 const RegisterForm = () => {
-  const { userIsLoading, userError } = useGlobalContext();
+  const { self } = useGlobalContext();
 
   const navigator = useAuthStackNavigator();
 
-  const { send: register, isLoading: registerIsLoading, error: registerError } = useRegister();
+  const register = useRegister(undefined);
 
   const { values, validation, onChange, onSubmit } = useForm(
     {
@@ -31,7 +31,7 @@ const RegisterForm = () => {
       displayName: "",
     },
     async (): Promise<any> => {
-      const res = await register(values);
+      const res = await register.send(values);
       const { data: tokens } = res;
       if (tokens) storageManager.set("session", tokens);
       return res;
@@ -39,8 +39,8 @@ const RegisterForm = () => {
     authValidators.register,
   );
 
-  const isLoading = registerIsLoading || userIsLoading;
-  const error = registerError ?? userError;
+  const isLoading = register.isLoading || self.isLoading;
+  const error = register.error ?? self.error;
 
   return (
     <View style={styles.wrapper}>

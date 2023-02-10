@@ -1,9 +1,12 @@
 import { colors } from "@lib/constants/colors";
+import { ChangeData } from "@lib/ts/form";
 import { UIColor } from "@lib/ts/generic";
-import { cloneElement, PropsWithChildren } from "react";
-import { ActivityIndicator, Pressable, StyleProp, StyleSheet, Text, TextProps } from "react-native";
-import { PressableProps } from "react-native/Libraries/Components/Pressable/Pressable";
+import React, { cloneElement } from "react";
+import { ActivityIndicator, View, ViewProps } from "react-native";
+import { StyleProp, StyleSheet } from "react-native";
 import { TextStyle, ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
+import { Picker, PickerItemProps } from "@react-native-picker/picker";
+import { ItemValue } from "@react-native-picker/picker/typings/Picker";
 
 interface Props {
   color?: UIColor;
@@ -13,7 +16,10 @@ interface Props {
   variant?: "contained" | "outlined" | "flat";
   size?: "extra-small" | "small" | "medium" | "large" | "extra-large";
 
-  rounded?: boolean;
+  name?: string;
+  value: string;
+  items: PickerItemProps<ItemValue>[];
+  placeholder?: string;
 
   disabled?: boolean;
   isLoading?: boolean;
@@ -22,15 +28,15 @@ interface Props {
   endIcon?: JSX.Element;
 
   style?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<TextStyle>;
+  pickerStyle?: StyleProp<TextStyle>;
 
-  pressableProps?: PressableProps;
-  textProps?: TextProps;
+  viewProps?: ViewProps;
+  pickerProps?: PickerItemProps;
 
-  onPress?: PressableProps["onPress"];
+  onChange?: (changeData: ChangeData<any, any>) => void;
 }
 
-const Button = (props: PropsWithChildren<Props>) => {
+const Select = (props: Props) => {
   const {
     color = "black",
     textColor = "white",
@@ -39,7 +45,10 @@ const Button = (props: PropsWithChildren<Props>) => {
     variant = "contained",
     size = "medium",
 
-    rounded = false,
+    name,
+    value,
+    items,
+    placeholder,
 
     disabled,
     isLoading,
@@ -48,32 +57,34 @@ const Button = (props: PropsWithChildren<Props>) => {
     endIcon,
 
     style,
-    textStyle,
+    pickerStyle,
 
-    pressableProps,
-    textProps,
+    viewProps,
+    pickerProps,
 
-    onPress,
-
-    children,
+    onChange = () => {},
   } = props;
 
-  const styles = createStyles(color, textColor, iconColor, size, variant, rounded);
+  const styles = createStyles(color, textColor, iconColor, size, variant);
 
   return (
-    <Pressable
-      disabled={disabled || isLoading}
-      style={[styles.pressable, disabled && styles.disabled, style]}
-      onPress={onPress}
-      {...pressableProps}
-    >
+    <View style={[styles.view, disabled && styles.disabled, style]} {...viewProps}>
       {startIcon &&
         cloneElement(startIcon, {
           style: [styles.icon, startIcon.props.style],
         })}
-      <Text style={[styles.text, textStyle]} {...textProps}>
-        {children}
-      </Text>
+      <Picker
+        enabled={!disabled && !isLoading}
+        selectedValue={value}
+        placeholder={placeholder}
+        onValueChange={value => onChange({ value, name })}
+        style={[styles.picker, pickerStyle]}
+        {...pickerProps}
+      >
+        {items.map((item, i) => (
+          <Picker.Item key={i} {...item} />
+        ))}
+      </Picker>
       {isLoading ? (
         <ActivityIndicator color={colors[iconColor]} size={styles.icon.fontSize} />
       ) : (
@@ -82,11 +93,11 @@ const Button = (props: PropsWithChildren<Props>) => {
           style: [styles.icon, endIcon.props.style],
         })
       )}
-    </Pressable>
+    </View>
   );
 };
 
-export default Button;
+export default Select;
 
 const createStyles = (
   color: UIColor,
@@ -94,7 +105,6 @@ const createStyles = (
   iconColor: UIColor,
   size: Props["size"] = "medium",
   variant: Props["variant"] = "contained",
-  rounded: boolean,
 ) => {
   const sizeStyles = createSizeStyles()[size];
   const variantStyles = createVariantStyles(color)[variant];
@@ -103,22 +113,24 @@ const createStyles = (
     disabled: {
       opacity: 0.5,
     },
-    pressable: {
+    view: {
+      display: "flex",
       flexDirection: "row",
       alignItems: "center",
 
       borderStyle: "solid",
       borderWidth: 2,
 
-      ...(rounded ? { borderRadius: 100 } : {}),
-
-      ...sizeStyles.pressable,
-      ...variantStyles.pressable,
+      ...sizeStyles.view,
+      ...variantStyles.view,
     },
-    text: {
+    picker: {
+      width: "100%",
+
       color: colors[textColor],
-      ...sizeStyles.text,
-      ...variantStyles.text,
+
+      ...sizeStyles.picker,
+      ...variantStyles.picker,
     },
     icon: {
       color: colors[iconColor],
@@ -130,31 +142,35 @@ const createStyles = (
 
 const createSizeStyles = () => ({
   "extra-small": StyleSheet.create({
-    pressable: {
+    view: {
       gap: 5,
 
       paddingHorizontal: 8,
-      paddingVertical: 4,
 
       borderRadius: 3,
     },
-    text: {
+    picker: {
+      paddingVertical: 0,
+
       fontSize: 10,
+
+      height: 22,
     },
     icon: {
       fontSize: 12,
     },
   }),
   small: StyleSheet.create({
-    pressable: {
+    view: {
       gap: 8,
 
       paddingHorizontal: 12,
-      paddingVertical: 8,
 
       borderRadius: 4,
     },
-    text: {
+    picker: {
+      paddingVertical: 2,
+
       fontSize: 12,
     },
     icon: {
@@ -162,15 +178,16 @@ const createSizeStyles = () => ({
     },
   }),
   medium: StyleSheet.create({
-    pressable: {
+    view: {
       gap: 12,
 
       paddingHorizontal: 16,
-      paddingVertical: 10,
 
       borderRadius: 5,
     },
-    text: {
+    picker: {
+      paddingVertical: 7,
+
       fontSize: 16,
     },
     icon: {
@@ -178,15 +195,16 @@ const createSizeStyles = () => ({
     },
   }),
   large: StyleSheet.create({
-    pressable: {
+    view: {
       gap: 16,
 
       paddingHorizontal: 24,
-      paddingVertical: 14,
 
       borderRadius: 6,
     },
-    text: {
+    picker: {
+      paddingVertical: 13.5,
+
       fontSize: 20,
     },
     icon: {
@@ -194,15 +212,16 @@ const createSizeStyles = () => ({
     },
   }),
   "extra-large": StyleSheet.create({
-    pressable: {
+    view: {
       gap: 24,
 
-      paddingHorizontal: 36,
-      paddingVertical: 24,
+      paddingHorizontal: 38,
 
       borderRadius: 8,
     },
-    text: {
+    picker: {
+      paddingVertical: 24,
+
       fontSize: 24,
     },
     icon: {
@@ -213,25 +232,25 @@ const createSizeStyles = () => ({
 
 const createVariantStyles = (color: UIColor) => ({
   contained: StyleSheet.create({
-    pressable: {
+    view: {
       borderColor: colors[color],
       backgroundColor: colors[color],
     },
-    text: {},
+    picker: {},
     icon: {},
   }),
   outlined: StyleSheet.create({
-    pressable: {
+    view: {
       borderColor: colors[color],
     },
-    text: {},
+    picker: {},
     icon: {},
   }),
   flat: StyleSheet.create({
-    pressable: {
+    view: {
       borderColor: "transparent",
     },
-    text: {},
+    picker: {},
     icon: {},
   }),
 });

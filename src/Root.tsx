@@ -6,13 +6,13 @@ import useGlobalContext from "./globalContext/hooks/useGlobalContext";
 import AuthStackNavigator from "./AuthStackNavigator";
 
 const Root = () => {
-  const { user } = useGlobalContext();
+  const { self } = useGlobalContext();
 
   return (
     <NavigationContainer>
       <StatusBar backgroundColor="rgba(15,20,20,1)" />
 
-      {user ? <BottomTabsNavigator /> : <AuthStackNavigator />}
+      {self.data ? <BottomTabsNavigator /> : <AuthStackNavigator />}
     </NavigationContainer>
   );
 };

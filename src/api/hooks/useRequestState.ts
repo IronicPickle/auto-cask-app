@@ -3,14 +3,14 @@ import { useState } from "react";
 
 export type CurrentReqState<D, R> = {
   isLoading: boolean;
-  data?: R;
+  data: R;
   error?: ApiError<keyof D>;
 };
 
-const useRequestState = <D, R>(defaultData?: R) => {
+const useRequestState = <D, R>(defaultData: R) => {
   const createReqState = (
     isLoading: boolean,
-    data?: R,
+    data: R,
     error?: ApiError<keyof D>,
   ): CurrentReqState<D, R> => ({
     isLoading,
