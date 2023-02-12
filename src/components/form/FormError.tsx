@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     gap: 8,
   },
   icon: {
@@ -49,5 +50,6 @@ const styles = StyleSheet.create({
   text: {
     color: colors.red,
     fontSize: 14,
+    textAlign: "center",
   },
 });

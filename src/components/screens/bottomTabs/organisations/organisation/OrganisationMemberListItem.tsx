@@ -4,6 +4,7 @@ import { organisationRoleColors, organisationRoleNames } from "@constants/generi
 import dayjs from "dayjs";
 import { Pressable, StyleSheet } from "react-native";
 import { Text, View } from "react-native";
+import TextWrapper from "@components/common/TextWrapper";
 
 interface Props {
   member: OrganisationMember;
@@ -18,7 +19,11 @@ const OrganisationMemberListItem = (props: Props) => {
   return (
     <Pressable style={styles.wrapper} onPress={onPress}>
       <View style={styles.detailsWrapper}>
-        <Text style={styles.displayName}>{user.displayName}</Text>
+        <TextWrapper>
+          <Text style={styles.displayName} numberOfLines={1}>
+            {user.displayName}
+          </Text>
+        </TextWrapper>
         <Text style={styles.joinedOn}>Joined {dayjs(joinedOn).format("DD/MM/YYYY")}</Text>
       </View>
 
@@ -36,13 +41,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    gap: 16,
 
     paddingVertical: 16,
     paddingHorizontal: 8,
   },
 
-  detailsWrapper: {},
+  detailsWrapper: {
+    flex: 1,
+  },
   displayName: {
+    flex: 1,
+
     color: colors.black,
     fontSize: 18,
     fontWeight: "700",

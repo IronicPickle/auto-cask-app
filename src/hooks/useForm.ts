@@ -63,5 +63,10 @@ export default <IS extends object>(
     return !failed;
   };
 
-  return { values, validation, onChange, onSubmit, setValues };
+  const resetValues = () => {
+    setValues(initialValues);
+    setValidation({ failed: false } as ValidationErrors<keyof IS>);
+  };
+
+  return { values, validation, onChange, onSubmit, setValues, resetValues };
 };

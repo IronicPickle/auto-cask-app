@@ -1,3 +1,4 @@
+import TextWrapper from "@components/common/TextWrapper";
 import { colors } from "@lib/constants/colors";
 import { organisationRoleColors, organisationRoleNames } from "@lib/constants/generic";
 import { useFocusEffect } from "@react-navigation/native";
@@ -10,6 +11,8 @@ import useOrganisationsContext from "../context/useOrganisationsContext";
 import { OrganisationsStackParamList } from "../OrganisationsStackNavigator";
 import OrganisationInviteList from "./OrganisationInviteList";
 import OrganisationMemberList from "./OrganisationMemberList";
+import RemoveOrganisationButton from "./RemoveOrganisationButton";
+import UpdateOrganisationButton from "./UpdateOrganisationButton";
 
 interface Props extends StackScreenProps<OrganisationsStackParamList, "Organisation"> {}
 
@@ -42,8 +45,20 @@ const Organisation = (props: Props) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.details}>
-        <Text style={styles.organisationName}>{organisation?.name}</Text>
-        <Text style={styles.joinedOn}>Joined {dayjs(joinedOn).format("DD/MM/YYYY")}</Text>
+        <View style={styles.header}>
+          <View style={styles.headerLeft}>
+            <TextWrapper>
+              <Text style={styles.organisationName} numberOfLines={1}>
+                {organisation?.name}
+              </Text>
+            </TextWrapper>
+            <Text style={styles.joinedOn}>Joined {dayjs(joinedOn).format("DD/MM/YYYY")}</Text>
+          </View>
+          <View style={styles.headerRight}>
+            <RemoveOrganisationButton organisation={organisation} />
+            <UpdateOrganisationButton organisation={organisation} />
+          </View>
+        </View>
 
         <Text style={[styles.role, { color: organisationRoleColors[role] }]}>
           {organisationRoleNames[role]}
@@ -54,8 +69,8 @@ const Organisation = (props: Props) => {
         </Text>
       </View>
 
-      {canViewMembers && <OrganisationMemberList organisationId={organisationId} />}
-      {canViewInvites && <OrganisationInviteList organisationId={organisationId} />}
+      {canViewMembers && <OrganisationMemberList organisation={membership.organisation} />}
+      {canViewInvites && <OrganisationInviteList organisation={membership.organisation} />}
     </View>
   );
 };
@@ -68,7 +83,18 @@ const styles = StyleSheet.create({
   details: {
     padding: 32,
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 16,
+  },
+  headerLeft: {
+    flex: 1,
+  },
   organisationName: {
+    flex: 1,
+
     color: colors.black,
     fontSize: 24,
     fontWeight: "700",
@@ -78,6 +104,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
   },
+
+  headerRight: {
+    flexShrink: 0,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+
   role: {
     marginTop: 24,
 

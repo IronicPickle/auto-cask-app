@@ -1,11 +1,19 @@
 import { UseRequestReturn } from "@api/hooks/useRequest";
 import useGetMemberships from "@api/user/hooks/useGetMemberships";
-import { UserGetMembershipsReq, UserGetMembershipsRes } from "@shared/ts/api/user";
+import {
+  UserGetInvitesReq,
+  UserGetInvitesRes,
+  UserGetMembershipsReq,
+  UserGetMembershipsRes,
+} from "@shared/ts/api/user";
 import OrganisationPermissionChecker from "@shared/permissionCheckers/OrganisationPermissionChecker";
-import { createContext, PropsWithChildren, useEffect } from "react";
+import { createContext, PropsWithChildren, useCallback } from "react";
+import useGetInvites from "@api/user/hooks/useGetInvites";
+import { useFocusEffect } from "@react-navigation/native";
 
 interface OrganisationsContextType {
   memberships: UseRequestReturn<UserGetMembershipsReq, UserGetMembershipsRes>;
+  invites: UseRequestReturn<UserGetInvitesReq, UserGetInvitesRes | undefined>;
   permissionChecker: OrganisationPermissionChecker;
 }
 
@@ -18,11 +26,15 @@ interface Props {}
 export default function OrganisationsContextProvider(props: PropsWithChildren<Props>) {
   const { children } = props;
 
-  const memberships = useGetMemberships<UserGetMembershipsRes>([]);
+  const memberships = useGetMemberships([]);
+  const invites = useGetInvites(undefined);
 
-  useEffect(() => {
-    memberships.send({});
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      memberships.send({});
+      invites.send({});
+    }, []),
+  );
 
   const permissionChecker = new OrganisationPermissionChecker(memberships.data);
 
@@ -30,6 +42,7 @@ export default function OrganisationsContextProvider(props: PropsWithChildren<Pr
     <OrganisationsContext.Provider
       value={{
         memberships,
+        invites,
         permissionChecker,
       }}
     >

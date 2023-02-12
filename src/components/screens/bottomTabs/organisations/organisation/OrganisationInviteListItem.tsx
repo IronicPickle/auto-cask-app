@@ -1,3 +1,4 @@
+import TextWrapper from "@components/common/TextWrapper";
 import { colors } from "@lib/constants/colors";
 import { OrganisationInvite } from "@shared/ts/api/generic";
 import dayjs from "dayjs";
@@ -12,12 +13,16 @@ interface Props {
 const OrganisationInviteListItem = (props: Props) => {
   const { invite, onPress } = props;
 
-  const { user, createdOn } = invite;
+  const { email, createdOn } = invite;
 
   return (
     <Pressable style={styles.wrapper} onPress={onPress}>
       <View style={styles.detailsWrapper}>
-        <Text style={styles.displayName}>{user.displayName}</Text>
+        <TextWrapper>
+          <Text style={styles.displayName} numberOfLines={1}>
+            {email}
+          </Text>
+        </TextWrapper>
         <Text style={styles.createdOn}>Joined {dayjs(createdOn).format("DD/MM/YYYY")}</Text>
       </View>
 
@@ -33,13 +38,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    gap: 16,
 
     paddingVertical: 16,
     paddingHorizontal: 8,
   },
 
-  detailsWrapper: {},
+  detailsWrapper: {
+    flex: 1,
+  },
   displayName: {
+    flex: 1,
     color: colors.black,
     fontSize: 18,
     fontWeight: "700",

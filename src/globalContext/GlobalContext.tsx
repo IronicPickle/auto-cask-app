@@ -1,5 +1,5 @@
 import { UseRequestReturn } from "@api/hooks/useRequest";
-import { UserGetSelfReq, UserGetSelfRes } from "@src/../../auto-cask-shared/ts/api/user";
+import { UserGetSelfReq, UserGetSelfRes } from "@shared/ts/api/user";
 import { createContext, PropsWithChildren } from "react";
 import useSession from "./hooks/useSession";
 

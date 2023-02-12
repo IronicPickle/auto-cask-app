@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { Pressable, StyleSheet } from "react-native";
 import { Text, View } from "react-native";
 import { useOrganisationsStackNavigator } from "../OrganisationsStackNavigator";
+import TextWrapper from "@components/common/TextWrapper";
 
 interface Props {
   membership: OrganisationMember;
@@ -23,7 +24,11 @@ const OrganisationListItem = (props: Props) => {
       onPress={() => navigator.navigate("Organisation", { organisationId: organisation._id })}
     >
       <View style={styles.detailsWrapper}>
-        <Text style={styles.organisationName}>{organisation.name}</Text>
+        <TextWrapper>
+          <Text style={styles.organisationName} numberOfLines={1}>
+            {organisation.name}
+          </Text>
+        </TextWrapper>
         <Text style={styles.joinedOn}>Joined {dayjs(joinedOn).format("DD/MM/YYYY")}</Text>
       </View>
 
@@ -41,13 +46,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    gap: 16,
 
     paddingVertical: 16,
     paddingHorizontal: 24,
   },
 
-  detailsWrapper: {},
+  detailsWrapper: {
+    flex: 1,
+  },
   organisationName: {
+    flex: 1,
+
     color: colors.black,
     fontSize: 18,
     fontWeight: "700",

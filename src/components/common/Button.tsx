@@ -30,6 +30,8 @@ interface Props {
   onPress?: PressableProps["onPress"];
 }
 
+export type ButtonProps = Props;
+
 const Button = (props: PropsWithChildren<Props>) => {
   const {
     color = "black",

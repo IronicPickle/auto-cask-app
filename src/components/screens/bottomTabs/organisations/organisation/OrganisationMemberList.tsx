@@ -2,29 +2,29 @@ import useGetOrganisationMembers from "@api/organisation/members/hooks/useGetOrg
 import DataCheck from "@components/common/DataCheck";
 import { colors } from "@lib/constants/colors";
 import { isEmpty } from "@shared/utils/generic";
-import { OrganisationMember } from "@shared/ts/api/generic";
+import { Organisation, OrganisationMember } from "@shared/ts/api/generic";
 import { useEffect, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, Text } from "react-native";
 import { View } from "react-native";
 import OrganisationMemberListItem from "./OrganisationMemberListItem";
-import OrganisationMemberModal from "./OrganisationMemberModal";
+import OrganisationMemberModal from "./member/OrganisationMemberModal";
 
 interface Props {
-  organisationId: string;
+  organisation: Organisation;
 }
 
 const OrganisationMemberList = (props: Props) => {
-  const { organisationId } = props;
+  const { organisation } = props;
 
   const organisationMembers = useGetOrganisationMembers([]);
 
   const [modalMember, setModalMember] = useState<OrganisationMember | undefined>(undefined);
 
-  const fetch = () => organisationMembers.send({ organisationId });
+  const fetch = () => organisationMembers.send({ organisationId: organisation._id });
 
   useEffect(() => {
     fetch();
-  }, [organisationId]);
+  }, [organisation._id]);
 
   return (
     <View style={styles.wrapper}>
