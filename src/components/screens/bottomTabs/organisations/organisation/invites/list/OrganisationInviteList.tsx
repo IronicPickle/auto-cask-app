@@ -7,11 +7,11 @@ import { StyleSheet, Text } from "react-native";
 import { View } from "react-native";
 import { RefreshControl, ScrollView } from "react-native-gesture-handler";
 import OrganisationInviteListItem from "./OrganisationInviteListItem";
-import OrganisationInviteModal from "./invite/OrganisationInviteModal";
+import OrganisationInviteModal from "../modal/OrganisationInviteModal";
 import useGetOrganisationInvites from "@api/organisation/invites/hooks/useGetOrganisationInvites";
 import IconButton from "@components/common/IconButton";
 import Icon from "react-native-vector-icons/Ionicons";
-import CreateInviteModal from "./CreateInviteModal";
+import CreateInviteModal from "../create/CreateInviteModal";
 
 interface Props {
   organisation: Organisation;

@@ -1,61 +1,57 @@
-import useDeleteOrganisationInvite from "@api/organisation/invites/hooks/useDeleteOrganisationInvite";
-import useRemoveOrganisationMember from "@api/organisation/members/hooks/useRemoveOrganisationMember";
+import useDeleteOrganisationPump from "@api/organisation/pumps/hooks/useDeleteOrganisationPump";
 import Button from "@components/common/Button";
 import FormError from "@components/form/FormError";
 import DialogModal from "@components/modals/DialogModal";
 import useDialogModal from "@components/modals/hooks/useDialogModal";
 import { colors } from "@lib/constants/colors";
-import { OrganisationMember } from "@shared/ts/api/generic";
+import useOrganisationsContext from "@screens/bottomTabs/organisations/context/useOrganisationsContext";
+import { Organisation, OrganisationPump } from "@shared/ts/api/generic";
 import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 import { StyleSheet, View } from "react-native";
-import useOrganisationsContext from "../../context/useOrganisationsContext";
 
 interface Props {
-  member?: OrganisationMember;
+  pump?: OrganisationPump;
   onClose?: () => void;
 }
 
-const RemoveMember = (props: Props) => {
-  const { member, onClose = () => {} } = props;
+const RemovePump = (props: Props) => {
+  const { pump, onClose = () => {} } = props;
 
   const { self } = useGlobalContext();
 
   const { permissionChecker } = useOrganisationsContext();
 
-  const { organisation, user } = member ?? {};
-
-  const removeMember = useRemoveOrganisationMember(null);
+  const deletePump = useDeleteOrganisationPump(null);
 
   const { dialogActive, openDialog, closeDialog, confirmDialog } = useDialogModal(async () => {
-    if (!organisation || !user) return;
-    const res = await removeMember.send({
-      organisationId: organisation?._id,
-      userId: user?._id,
+    if (!pump) return;
+    const res = await deletePump.send({
+      pumpId: pump?._id,
     });
     if (res.error) return;
     onClose();
   });
 
-  const canRemoveMember = permissionChecker.canRemoveMember(self.data?._id, user?._id);
+  const canDeletePumps = permissionChecker.canDeletePumps(self.data?._id);
 
   return (
     <View style={styles.wrapper}>
       <Button
         color="red"
         onPress={openDialog}
-        disabled={!canRemoveMember}
-        isLoading={removeMember.isLoading}
+        disabled={!canDeletePumps}
+        isLoading={deletePump.isLoading}
       >
-        Remove member
+        Remove pump
       </Button>
-      <FormError error={removeMember.error?.error} />
+      <FormError error={deletePump.error?.error} />
 
       <DialogModal active={dialogActive} onClose={closeDialog} onConfirm={confirmDialog} />
     </View>
   );
 };
 
-export default RemoveMember;
+export default RemovePump;
 
 const styles = StyleSheet.create({
   wrapper: {

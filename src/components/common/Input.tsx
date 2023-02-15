@@ -1,6 +1,7 @@
 import { colors } from "@lib/constants/colors";
 import { ChangeData } from "@lib/ts/form";
 import { UIColor } from "@lib/ts/generic";
+import { rgba } from "@lib/utils/generic";
 import { cloneElement } from "react";
 import { ActivityIndicator, View, ViewProps } from "react-native";
 import { TextInputProps } from "react-native";
@@ -81,6 +82,7 @@ const Input = (props: Props) => {
         placeholder={placeholder}
         onChangeText={value => onChange({ value, name })}
         style={[styles.textInput, textInputStyle]}
+        placeholderTextColor={rgba(colors[textColor], 0.5)}
         {...textInputProps}
       />
       {isLoading ? (

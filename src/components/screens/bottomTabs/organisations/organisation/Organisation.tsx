@@ -9,10 +9,12 @@ import { useCallback } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import useOrganisationsContext from "../context/useOrganisationsContext";
 import { OrganisationsStackParamList } from "../OrganisationsStackNavigator";
-import OrganisationInviteList from "./OrganisationInviteList";
-import OrganisationMemberList from "./OrganisationMemberList";
+import LeaveOrganisationButton from "./LeaveOrganisationButton";
+import OrganisationInviteList from "./invites/list/OrganisationInviteList";
+import OrganisationPumpList from "./pumps/list/OrganisationPumpList";
 import RemoveOrganisationButton from "./RemoveOrganisationButton";
 import UpdateOrganisationButton from "./UpdateOrganisationButton";
+import OrganisationMemberList from "./members/list/OrganisationMemberList";
 
 interface Props extends StackScreenProps<OrganisationsStackParamList, "Organisation"> {}
 
@@ -21,7 +23,7 @@ const Organisation = (props: Props) => {
 
   const { self } = useGlobalContext();
 
-  const { memberships, permissionChecker } = useOrganisationsContext();
+  const { memberships, organisationMembers, permissionChecker } = useOrganisationsContext();
 
   const { organisationId } = route.params;
 
@@ -32,6 +34,9 @@ const Organisation = (props: Props) => {
   useFocusEffect(
     useCallback(() => {
       memberships.send({});
+      organisationMembers.send({
+        organisationId,
+      });
     }, []),
   );
 
@@ -41,6 +46,7 @@ const Organisation = (props: Props) => {
 
   const canViewMembers = permissionChecker.canViewMembers(self.data?._id);
   const canViewInvites = permissionChecker.canViewInvites(self.data?._id);
+  const canViewPumps = permissionChecker.canViewPumps(self.data?._id);
 
   return (
     <View style={styles.wrapper}>
@@ -56,6 +62,7 @@ const Organisation = (props: Props) => {
           </View>
           <View style={styles.headerRight}>
             <RemoveOrganisationButton organisation={organisation} />
+            <LeaveOrganisationButton organisation={organisation} />
             <UpdateOrganisationButton organisation={organisation} />
           </View>
         </View>
@@ -69,6 +76,7 @@ const Organisation = (props: Props) => {
         </Text>
       </View>
 
+      {canViewPumps && <OrganisationPumpList organisation={membership.organisation} />}
       {canViewMembers && <OrganisationMemberList organisation={membership.organisation} />}
       {canViewInvites && <OrganisationInviteList organisation={membership.organisation} />}
     </View>

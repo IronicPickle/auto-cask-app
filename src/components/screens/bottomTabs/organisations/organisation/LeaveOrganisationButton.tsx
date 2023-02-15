@@ -1,4 +1,3 @@
-import useDeleteOrganisation from "@api/organisation/hooks/useDeleteOrganisation";
 import IconButton from "@components/common/IconButton";
 import DialogModal from "@components/modals/DialogModal";
 import useDialogModal from "@components/modals/hooks/useDialogModal";
@@ -7,12 +6,13 @@ import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 import useOrganisationsContext from "../context/useOrganisationsContext";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useOrganisationsStackNavigator } from "../OrganisationsStackNavigator";
+import useLeaveOrganisation from "@api/organisation/hooks/useLeaveOrganisation";
 
 interface Props {
   organisation?: Organisation;
 }
 
-const RemoveOrganisationButton = (props: Props) => {
+const LeaveOrganisationButton = (props: Props) => {
   const { organisation } = props;
 
   const { self } = useGlobalContext();
@@ -21,11 +21,11 @@ const RemoveOrganisationButton = (props: Props) => {
 
   const navigator = useOrganisationsStackNavigator();
 
-  const deleteOrganisation = useDeleteOrganisation(null);
+  const leaveOrganisation = useLeaveOrganisation(null);
 
   const { dialogActive, openDialog, closeDialog, confirmDialog } = useDialogModal(async () => {
     if (!organisation) return;
-    const res = await deleteOrganisation.send({
+    const res = await leaveOrganisation.send({
       organisationId: organisation?._id,
     });
     if (res.error) return;
@@ -34,23 +34,23 @@ const RemoveOrganisationButton = (props: Props) => {
     navigator.navigate("OrganisationList");
   });
 
-  const canDelete = permissionChecker.canDelete(self.data?._id);
+  const isMember =
+    permissionChecker.isMember(self.data?._id) && !permissionChecker.isOwner(self.data?._id);
 
-  if (!canDelete) return null;
+  if (!isMember) return null;
 
   return (
     <>
-      <IconButton size="small" color="red" icon={<Icon name="trash" />} onPress={openDialog} />
+      <IconButton size="small" color="red" icon={<Icon name="log-out" />} onPress={openDialog} />
 
       <DialogModal
-        title={`Are you sure you want to delete ${organisation?.name}?`}
+        title={`Are you sure you want to leave ${organisation?.name}?`}
         active={dialogActive}
         onClose={closeDialog}
         onConfirm={confirmDialog}
-        requiredText={organisation?.name}
       />
     </>
   );
 };
 
-export default RemoveOrganisationButton;
+export default LeaveOrganisationButton;

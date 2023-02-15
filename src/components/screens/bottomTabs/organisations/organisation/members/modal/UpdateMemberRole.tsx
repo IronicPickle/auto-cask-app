@@ -12,10 +12,10 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { organisationSelectItems } from "@lib/constants/generic";
 import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
-import useOrganisationsContext from "../../context/useOrganisationsContext";
 import Button from "@components/common/Button";
 import DialogModal from "@components/modals/DialogModal";
 import useDialogModal from "@components/modals/hooks/useDialogModal";
+import useOrganisationsContext from "@screens/bottomTabs/organisations/context/useOrganisationsContext";
 
 interface Props {
   member?: OrganisationMember;

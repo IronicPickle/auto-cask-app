@@ -7,7 +7,7 @@ import { colors } from "@lib/constants/colors";
 import { OrganisationInvite } from "@shared/ts/api/generic";
 import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 import { StyleSheet, View } from "react-native";
-import useOrganisationsContext from "../../context/useOrganisationsContext";
+import useOrganisationsContext from "../../../context/useOrganisationsContext";
 
 interface Props {
   invite?: OrganisationInvite;

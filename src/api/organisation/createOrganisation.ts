@@ -3,9 +3,7 @@ import type { OrganisationCreateReq, OrganisationCreateRes } from "@shared/ts/ap
 
 export default async ({ name }: OrganisationCreateReq) => {
   const { data } = await api.post<OrganisationCreateRes>("/organisation/create", {
-    params: {
-      name,
-    },
+    name,
   });
   return data;
 };

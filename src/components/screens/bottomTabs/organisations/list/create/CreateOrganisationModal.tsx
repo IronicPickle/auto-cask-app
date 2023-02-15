@@ -1,10 +1,8 @@
 import { colors } from "@lib/constants/colors";
 import dayjs from "dayjs";
 import { StyleSheet, Text, View } from "react-native";
-import { Organisation } from "@shared/ts/api/generic";
 import Modal from "@components/modals/Modal";
 import useForm from "@hooks/useForm";
-import useUpdateOrganisation from "@api/organisation/hooks/useUpdateOrganisation";
 import React, { useEffect } from "react";
 import organisationValidators from "@shared/validators/organisationValidators";
 import FormRow from "@components/form/FormRow";
@@ -13,54 +11,45 @@ import Input from "@components/common/Input";
 import FormError from "@components/form/FormError";
 import Button from "@components/common/Button";
 import TextWrapper from "@components/common/TextWrapper";
+import useCreateOrganisation from "@api/organisation/hooks/useCreateOrganisation";
 
 interface Props {
-  organisation?: Organisation;
+  active?: boolean;
   onClose: () => void;
 }
 
-const UpdateOrganisationModal = (props: Props) => {
-  const { organisation, onClose } = props;
+const CreateOrganisationModal = (props: Props) => {
+  const { active, onClose } = props;
 
-  const { name, createdOn } = organisation ?? {};
+  const createOrganisation = useCreateOrganisation(null);
 
-  const updateOrganisation = useUpdateOrganisation(null);
-
-  const { values, validation, onChange, onSubmit, setValues, resetValues } = useForm(
+  const { values, validation, onChange, onSubmit, resetValues } = useForm(
     {
-      organisationId: "",
       name: "",
     },
     async values => {
-      const res = await updateOrganisation.send(values);
+      const res = await createOrganisation.send(values);
       if (!res.error) onClose();
       return res;
     },
-    organisationValidators.update,
+    organisationValidators.create,
   );
 
   useEffect(() => {
-    if (!organisation) return;
+    if (!active) return;
     resetValues();
-    updateOrganisation.reset();
-    setValues({
-      organisationId: organisation._id,
-      name: organisation.name,
-    });
-  }, [organisation]);
-
-  const changesMade = values.name !== name;
+    createOrganisation.reset();
+  }, [active]);
 
   return (
-    <Modal active={!!organisation} onClose={onClose}>
+    <Modal active={active} onClose={onClose}>
       <View style={styles.wrapper}>
         <View style={styles.details}>
           <TextWrapper>
-            <Text style={styles.name} numberOfLines={1}>
-              Editing {name}
+            <Text style={styles.title} numberOfLines={1}>
+              Create an Organisation
             </Text>
           </TextWrapper>
-          <Text style={styles.createdOn}>Created {dayjs(createdOn).format("DD/MM/YYYY")}</Text>
         </View>
 
         <View style={styles.form}>
@@ -70,24 +59,23 @@ const UpdateOrganisationModal = (props: Props) => {
                 variant="outlined"
                 textColor="black"
                 name="name"
+                placeholder="The Green Inn"
                 value={values.name}
                 onChange={onChange}
               />
             </FormEntry>
           </FormRow>
-          <FormError error={updateOrganisation.error?.error} />
-          {changesMade && (
-            <Button color="green" onPress={onSubmit} isLoading={updateOrganisation.isLoading}>
-              Update organisation
-            </Button>
-          )}
+          <FormError error={createOrganisation.error?.error} />
+          <Button color="green" onPress={onSubmit} isLoading={createOrganisation.isLoading}>
+            Create organisation
+          </Button>
         </View>
       </View>
     </Modal>
   );
 };
 
-export default UpdateOrganisationModal;
+export default CreateOrganisationModal;
 
 const styles = StyleSheet.create({
   wrapper: {},
@@ -105,16 +93,11 @@ const styles = StyleSheet.create({
     padding: 32,
     paddingRight: 64,
   },
-  name: {
+  title: {
     flex: 1,
 
     color: colors.black,
     fontSize: 24,
     fontWeight: "700",
-  },
-  createdOn: {
-    color: colors.black,
-    fontSize: 14,
-    fontWeight: "400",
   },
 });

@@ -1,10 +1,10 @@
 import IconButton from "@components/common/IconButton";
 import { Organisation } from "@shared/ts/api/generic";
 import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
-import useOrganisationsContext from "../context/useOrganisationsContext";
 import Icon from "react-native-vector-icons/Ionicons";
-import UpdateOrganisationModal from "./UpdateOrganisationModal";
+import UpdateOrganisationModal from "./modal/UpdateOrganisationModal";
 import { useState } from "react";
+import useOrganisationsContext from "../context/useOrganisationsContext";
 
 interface Props {
   organisation: Organisation;

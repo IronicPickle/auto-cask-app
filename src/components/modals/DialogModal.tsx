@@ -80,7 +80,7 @@ const DialogModal = (props: PropsWithChildren<Props>) => {
             onClose();
           }}
         >
-          Cancel
+          {cancelText}
         </Button>
         <Button
           color="blue"
@@ -91,7 +91,7 @@ const DialogModal = (props: PropsWithChildren<Props>) => {
             onClose();
           }}
         >
-          Confirm
+          {confirmText}
         </Button>
       </View>
     </Modal>

@@ -10,10 +10,17 @@ import OrganisationPermissionChecker from "@shared/permissionCheckers/Organisati
 import { createContext, PropsWithChildren, useCallback } from "react";
 import useGetInvites from "@api/user/hooks/useGetInvites";
 import { useFocusEffect } from "@react-navigation/native";
+import useGetOrganisationMembers from "@api/organisation/members/hooks/useGetOrganisationMembers";
+import {
+  OrganisationMembersGetAllReq,
+  OrganisationMembersGetAllRes,
+} from "@shared/ts/api/organisation";
 
 interface OrganisationsContextType {
   memberships: UseRequestReturn<UserGetMembershipsReq, UserGetMembershipsRes>;
   invites: UseRequestReturn<UserGetInvitesReq, UserGetInvitesRes | undefined>;
+
+  organisationMembers: UseRequestReturn<OrganisationMembersGetAllReq, OrganisationMembersGetAllRes>;
   permissionChecker: OrganisationPermissionChecker;
 }
 
@@ -36,13 +43,17 @@ export default function OrganisationsContextProvider(props: PropsWithChildren<Pr
     }, []),
   );
 
-  const permissionChecker = new OrganisationPermissionChecker(memberships.data);
+  const organisationMembers = useGetOrganisationMembers([]);
+
+  const permissionChecker = new OrganisationPermissionChecker(organisationMembers.data);
 
   return (
     <OrganisationsContext.Provider
       value={{
         memberships,
         invites,
+
+        organisationMembers,
         permissionChecker,
       }}
     >
