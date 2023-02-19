@@ -56,6 +56,10 @@ const CreatePumpModal = (props: Props) => {
     });
   }, [organisation, service]);
 
+  useEffect(() => {
+    if (organisation) setService(undefined);
+  }, [organisation]);
+
   if (!organisation) return null;
 
   return (

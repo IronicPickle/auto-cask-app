@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
 
   detailsWrapper: {
     flex: 1,
+    minWidth: "50%",
   },
   name: {
     flex: 1,
