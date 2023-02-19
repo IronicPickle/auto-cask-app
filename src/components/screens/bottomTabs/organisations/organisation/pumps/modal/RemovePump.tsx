@@ -1,4 +1,4 @@
-import useDeleteOrganisationPump from "@api/organisation/pumps/hooks/useDeleteOrganisationPump";
+import useDeleteOrganisationPump from "@api/organisations/pumps/hooks/useDeleteOrganisationPump";
 import Button from "@components/common/Button";
 import FormError from "@components/form/FormError";
 import DialogModal from "@components/modals/DialogModal";
@@ -26,7 +26,10 @@ const RemovePump = (props: Props) => {
   const { dialogActive, openDialog, closeDialog, confirmDialog } = useDialogModal(async () => {
     if (!pump) return;
     const res = await deletePump.send({
-      pumpId: pump?._id,
+      params: {
+        organisationId: pump.organisation._id,
+        pumpId: pump._id,
+      },
     });
     if (res.error) return;
     onClose();

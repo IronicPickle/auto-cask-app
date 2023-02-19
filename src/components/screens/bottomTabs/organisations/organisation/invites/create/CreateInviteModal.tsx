@@ -12,7 +12,7 @@ import Input from "@components/common/Input";
 import FormError from "@components/form/FormError";
 import Button from "@components/common/Button";
 import TextWrapper from "@components/common/TextWrapper";
-import useCreateOrganisationInvite from "@api/organisation/invites/hooks/useCreateOrganisationInvite";
+import useCreateOrganisationInvite from "@api/organisations/invites/hooks/useCreateOrganisationInvite";
 
 interface Props {
   organisation?: Organisation;
@@ -32,7 +32,10 @@ const CreateInviteModal = (props: Props) => {
       email: "",
     },
     async values => {
-      const res = await createInvite.send(values);
+      const res = await createInvite.send({
+        params: { organisationId: values.organisationId },
+        body: { email: values.email },
+      });
       if (!res.error) onClose();
       return res;
     },

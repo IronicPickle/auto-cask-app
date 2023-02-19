@@ -15,7 +15,7 @@ import ServiceList from "./list/ServiceList";
 import { AutoCaskService } from "@lib/ts/generic";
 import IconButton from "@components/common/IconButton";
 import Icon from "react-native-vector-icons/Ionicons";
-import useCreateOrganisationPump from "@api/organisation/pumps/hooks/useCreateOrganisationPump";
+import useCreateOrganisationPump from "@api/organisations/pumps/hooks/useCreateOrganisationPump";
 
 interface Props {
   organisation?: Organisation;
@@ -38,7 +38,15 @@ const CreatePumpModal = (props: Props) => {
       name: "",
     },
     async values => {
-      const res = await createPump.send(values);
+      const res = await createPump.send({
+        params: {
+          organisationId: values.organisationId,
+        },
+        body: {
+          mac: values.mac,
+          name: values.name,
+        },
+      });
       if (!res.error) onClose();
       return res;
     },

@@ -28,7 +28,12 @@ const LoginForm = () => {
       password: "",
     },
     async (): Promise<any> => {
-      const res = await login.send(values);
+      const res = await login.send({
+        body: {
+          email: values.email,
+          password: values.password,
+        },
+      });
       const { data: tokens } = res;
       if (tokens) storageManager.set("session", tokens);
       return res;

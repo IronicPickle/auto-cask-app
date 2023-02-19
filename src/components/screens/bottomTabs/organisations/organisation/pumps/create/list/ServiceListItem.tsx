@@ -3,9 +3,9 @@ import { ActivityIndicator, Pressable, StyleSheet } from "react-native";
 import { Text, View } from "react-native";
 import TextWrapper from "@components/common/TextWrapper";
 import { AutoCaskService } from "@lib/ts/generic";
-import useSendFingerprint from "@api/fingerprint/hooks/useSendFingerprint";
 import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 import FormError from "@components/form/FormError";
+import useCreateFingerprint from "@api/fingerprints/hooks/useCreateFingerprint";
 
 interface Props {
   service: AutoCaskService;
@@ -19,12 +19,17 @@ const ServiceListItem = (props: Props) => {
 
   const { name, fullName, host, port } = service;
 
-  const fingerprint = useSendFingerprint(undefined);
+  const fingerprint = useCreateFingerprint(undefined);
 
   const sendFingerprint = async () => {
     if (!self.data) return;
     const url = `http://${host}:${port}`;
-    const res = await fingerprint.send({ url, userId: self.data._id });
+    const res = await fingerprint.send({
+      url,
+      body: {
+        userId: self.data._id,
+      },
+    });
     if (res.error) return;
     onFingerprint();
   };

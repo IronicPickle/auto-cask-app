@@ -1,6 +1,6 @@
 import { SessionTokens } from "@api/api";
 import useStorageItem from "@api/hooks/useStorageItem";
-import useGetSelf from "@api/user/hooks/useGetSelf";
+import useGetSelf from "@api/users/hooks/useGetSelf";
 import { useEffect } from "react";
 
 const useSession = () => {

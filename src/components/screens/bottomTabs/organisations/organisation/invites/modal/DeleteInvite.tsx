@@ -1,4 +1,4 @@
-import useDeleteOrganisationInvite from "@api/organisation/invites/hooks/useDeleteOrganisationInvite";
+import useDeleteOrganisationInvite from "@api/organisations/invites/hooks/useDeleteOrganisationInvite";
 import Button from "@components/common/Button";
 import FormError from "@components/form/FormError";
 import DialogModal from "@components/modals/DialogModal";
@@ -26,7 +26,7 @@ const DeleteInvite = (props: Props) => {
   const { dialogActive, openDialog, closeDialog, confirmDialog } = useDialogModal(async () => {
     if (!invite) return;
     const res = await deleteInvite.send({
-      inviteId: invite?._id,
+      params: { organisationId: invite.organisation._id, inviteId: invite._id },
     });
     if (res.error) return;
     onClose();

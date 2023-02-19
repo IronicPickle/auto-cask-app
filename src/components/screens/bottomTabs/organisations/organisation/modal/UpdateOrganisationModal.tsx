@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Organisation } from "@shared/ts/api/generic";
 import Modal from "@components/modals/Modal";
 import useForm from "@hooks/useForm";
-import useUpdateOrganisation from "@api/organisation/hooks/useUpdateOrganisation";
+import useUpdateOrganisation from "@api/organisations/hooks/useUpdateOrganisation";
 import React, { useEffect } from "react";
 import organisationValidators from "@shared/validators/organisationValidators";
 import FormRow from "@components/form/FormRow";
@@ -32,7 +32,14 @@ const UpdateOrganisationModal = (props: Props) => {
       name: "",
     },
     async values => {
-      const res = await updateOrganisation.send(values);
+      const res = await updateOrganisation.send({
+        params: {
+          organisationId: values.organisationId,
+        },
+        body: {
+          name: values.name,
+        },
+      });
       if (!res.error) onClose();
       return res;
     },

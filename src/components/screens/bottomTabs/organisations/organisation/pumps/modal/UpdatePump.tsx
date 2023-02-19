@@ -12,7 +12,7 @@ import Button from "@components/common/Button";
 import DialogModal from "@components/modals/DialogModal";
 import useDialogModal from "@components/modals/hooks/useDialogModal";
 import useOrganisationsContext from "@screens/bottomTabs/organisations/context/useOrganisationsContext";
-import useUpdateOrganisationPump from "@api/organisation/pumps/hooks/useUpdateOrganisationPump";
+import useUpdateOrganisationPump from "@api/organisations/pumps/hooks/useUpdateOrganisationPump";
 import Input from "@components/common/Input";
 
 interface Props {
@@ -33,11 +33,20 @@ const UpdatePump = (props: Props) => {
 
   const { values, validation, onChange, onSubmit, setValues, resetValues } = useForm(
     {
+      organisationId: "",
       pumpId: "",
       name: "",
     },
     async values => {
-      const res = await updatePump.send(values);
+      const res = await updatePump.send({
+        params: {
+          organisationId: values.organisationId,
+          pumpId: values.pumpId,
+        },
+        body: {
+          name: values.name,
+        },
+      });
       if (!res.error) onClose();
       return res;
     },
@@ -51,6 +60,7 @@ const UpdatePump = (props: Props) => {
     resetValues();
     updatePump.reset();
     setValues({
+      organisationId: pump.organisation._id,
       pumpId: pump._id,
       name: pump.name,
     });

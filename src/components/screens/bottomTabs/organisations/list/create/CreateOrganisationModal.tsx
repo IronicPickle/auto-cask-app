@@ -11,7 +11,7 @@ import Input from "@components/common/Input";
 import FormError from "@components/form/FormError";
 import Button from "@components/common/Button";
 import TextWrapper from "@components/common/TextWrapper";
-import useCreateOrganisation from "@api/organisation/hooks/useCreateOrganisation";
+import useCreateOrganisation from "@api/organisations/hooks/useCreateOrganisation";
 
 interface Props {
   active?: boolean;
@@ -28,7 +28,11 @@ const CreateOrganisationModal = (props: Props) => {
       name: "",
     },
     async values => {
-      const res = await createOrganisation.send(values);
+      const res = await createOrganisation.send({
+        body: {
+          name: values.name,
+        },
+      });
       if (!res.error) onClose();
       return res;
     },

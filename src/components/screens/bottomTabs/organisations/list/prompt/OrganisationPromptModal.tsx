@@ -1,9 +1,9 @@
 import { OrganisationInvite } from "@shared/ts/api/generic";
-import useAcceptOrganisationInvite from "@api/organisation/invites/hooks/useAcceptOrganisationInvite";
+import useAcceptOrganisationInvite from "@api/organisations/invites/hooks/useAcceptOrganisationInvite";
 import DialogModal from "@components/modals/DialogModal";
 import { useEffect } from "react";
 import FormError from "@components/form/FormError";
-import useRejectOrganisationInvite from "@api/organisation/invites/hooks/useRejectOrganisationInvite";
+import useRejectOrganisationInvite from "@api/organisations/invites/hooks/useRejectOrganisationInvite";
 
 interface Props {
   invite?: OrganisationInvite;
@@ -27,7 +27,10 @@ const OrganisationPromptModal = (props: Props) => {
   const accept = async () => {
     if (!invite) return;
     const res = await acceptInvite.send({
-      inviteId: invite._id,
+      params: {
+        organisationId: invite.organisation._id,
+        inviteId: invite._id,
+      },
     });
     if (res.error) return;
     onClose();
@@ -36,7 +39,10 @@ const OrganisationPromptModal = (props: Props) => {
   const reject = async () => {
     if (!invite) return;
     const res = await rejectinvite.send({
-      inviteId: invite._id,
+      params: {
+        organisationId: invite.organisation._id,
+        inviteId: invite._id,
+      },
     });
     if (res.error) return;
     onClose();

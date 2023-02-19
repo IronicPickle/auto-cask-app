@@ -20,7 +20,7 @@ const OrganisationMemberList = (props: Props) => {
 
   const [modalMember, setModalMember] = useState<OrganisationMember | undefined>(undefined);
 
-  const fetch = () => organisationMembers.send({ organisationId: organisation._id });
+  const fetch = () => organisationMembers.send({ params: { organisationId: organisation._id } });
 
   return (
     <View style={styles.wrapper}>

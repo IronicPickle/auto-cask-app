@@ -1,5 +1,5 @@
-import useDeleteOrganisationInvite from "@api/organisation/invites/hooks/useDeleteOrganisationInvite";
-import useRemoveOrganisationMember from "@api/organisation/members/hooks/useRemoveOrganisationMember";
+import useDeleteOrganisationInvite from "@api/organisations/invites/hooks/useDeleteOrganisationInvite";
+import useRemoveOrganisationMember from "@api/organisations/members/hooks/useRemoveOrganisationMember";
 import Button from "@components/common/Button";
 import FormError from "@components/form/FormError";
 import DialogModal from "@components/modals/DialogModal";
@@ -29,8 +29,10 @@ const RemoveMember = (props: Props) => {
   const { dialogActive, openDialog, closeDialog, confirmDialog } = useDialogModal(async () => {
     if (!organisation || !user) return;
     const res = await removeMember.send({
-      organisationId: organisation?._id,
-      userId: user?._id,
+      params: {
+        organisationId: organisation._id,
+        userId: user._id,
+      },
     });
     if (res.error) return;
     onClose();

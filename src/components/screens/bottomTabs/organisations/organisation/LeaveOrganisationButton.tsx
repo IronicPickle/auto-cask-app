@@ -6,7 +6,7 @@ import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 import useOrganisationsContext from "../context/useOrganisationsContext";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useOrganisationsStackNavigator } from "../OrganisationsStackNavigator";
-import useLeaveOrganisation from "@api/organisation/hooks/useLeaveOrganisation";
+import useLeaveOrganisation from "@api/organisations/hooks/useLeaveOrganisation";
 
 interface Props {
   organisation?: Organisation;
@@ -26,7 +26,9 @@ const LeaveOrganisationButton = (props: Props) => {
   const { dialogActive, openDialog, closeDialog, confirmDialog } = useDialogModal(async () => {
     if (!organisation) return;
     const res = await leaveOrganisation.send({
-      organisationId: organisation?._id,
+      params: {
+        organisationId: organisation?._id,
+      },
     });
     if (res.error) return;
 

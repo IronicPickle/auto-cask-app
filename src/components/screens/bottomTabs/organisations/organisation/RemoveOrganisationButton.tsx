@@ -1,4 +1,4 @@
-import useDeleteOrganisation from "@api/organisation/hooks/useDeleteOrganisation";
+import useDeleteOrganisation from "@api/organisations/hooks/useDeleteOrganisation";
 import IconButton from "@components/common/IconButton";
 import DialogModal from "@components/modals/DialogModal";
 import useDialogModal from "@components/modals/hooks/useDialogModal";
@@ -26,7 +26,7 @@ const RemoveOrganisationButton = (props: Props) => {
   const { dialogActive, openDialog, closeDialog, confirmDialog } = useDialogModal(async () => {
     if (!organisation) return;
     const res = await deleteOrganisation.send({
-      organisationId: organisation?._id,
+      params: { organisationId: organisation._id },
     });
     if (res.error) return;
 

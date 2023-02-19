@@ -8,7 +8,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import useOrganisationsContext from "../../../context/useOrganisationsContext";
 import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 import CreatePumpModal from "../create/CreatePumpModal";
-import useGetOrganisationPumps from "@api/organisation/pumps/hooks/useGetOrganisationPumps";
+import useGetOrganisationPumps from "@api/organisations/pumps/hooks/useGetOrganisationPumps";
 import DataCheck from "@components/common/DataCheck";
 import OrganisationPumpListItem from "./OrganisationPumpListItem";
 import { isEmpty } from "@shared/utils/generic";
@@ -30,7 +30,7 @@ const OrganisationPumpList = (props: Props) => {
   const [modalPump, setModalPump] = useState<OrganisationPump | undefined>(undefined);
   const [createModalActive, setCreateModalActive] = useState(false);
 
-  const fetch = () => organisationPumps.send({ organisationId: organisation._id });
+  const fetch = () => organisationPumps.send({ params: { organisationId: organisation._id } });
 
   useEffect(() => {
     fetch();

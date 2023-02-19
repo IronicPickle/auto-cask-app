@@ -1,4 +1,4 @@
-import useUpdateOrganisationMembersRole from "@api/organisation/members/hooks/useUpdateOrganisationMembersRole";
+import useUpdateOrganisationMembersRole from "@api/organisations/members/hooks/useUpdateOrganisationMembersRole";
 import Select from "@components/common/Select";
 import FormEntry from "@components/form/FormEntry";
 import FormError from "@components/form/FormError";
@@ -40,7 +40,15 @@ const UpdateMemberRole = (props: Props) => {
       role: OrganisationRole.Member,
     },
     async values => {
-      const res = await updateMember.send(values);
+      const res = await updateMember.send({
+        params: {
+          organisationId: values.organisationId,
+          userId: values.userId,
+        },
+        body: {
+          role: values.role,
+        },
+      });
       if (!res.error) onClose();
       return res;
     },

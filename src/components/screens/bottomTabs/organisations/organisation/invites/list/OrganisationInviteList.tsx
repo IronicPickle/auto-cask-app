@@ -8,7 +8,7 @@ import { View } from "react-native";
 import { RefreshControl, ScrollView } from "react-native-gesture-handler";
 import OrganisationInviteListItem from "./OrganisationInviteListItem";
 import OrganisationInviteModal from "../modal/OrganisationInviteModal";
-import useGetOrganisationInvites from "@api/organisation/invites/hooks/useGetOrganisationInvites";
+import useGetOrganisationInvites from "@api/organisations/invites/hooks/useGetOrganisationInvites";
 import IconButton from "@components/common/IconButton";
 import Icon from "react-native-vector-icons/Ionicons";
 import CreateInviteModal from "../create/CreateInviteModal";
@@ -25,7 +25,7 @@ const OrganisationInviteList = (props: Props) => {
   const [modalInvite, setModalInvite] = useState<OrganisationInvite | undefined>(undefined);
   const [createModalActive, setCreateModalActive] = useState(false);
 
-  const fetch = () => organisationInvites.send({ organisationId: organisation._id });
+  const fetch = () => organisationInvites.send({ params: { organisationId: organisation._id } });
 
   useEffect(() => {
     fetch();

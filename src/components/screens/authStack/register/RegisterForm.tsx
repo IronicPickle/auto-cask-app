@@ -31,7 +31,13 @@ const RegisterForm = () => {
       displayName: "",
     },
     async (): Promise<any> => {
-      const res = await register.send(values);
+      const res = await register.send({
+        body: {
+          email: values.email,
+          password: values.password,
+          displayName: values.displayName,
+        },
+      });
       const { data: tokens } = res;
       if (tokens) storageManager.set("session", tokens);
       return res;
