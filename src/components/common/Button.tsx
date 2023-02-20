@@ -14,6 +14,7 @@ interface Props {
   size?: "extra-small" | "small" | "medium" | "large" | "extra-large";
 
   rounded?: boolean;
+  justify?: ViewStyle["justifyContent"];
 
   disabled?: boolean;
   isLoading?: boolean;
@@ -42,6 +43,7 @@ const Button = (props: PropsWithChildren<Props>) => {
     size = "medium",
 
     rounded = false,
+    justify,
 
     disabled,
     isLoading,
@@ -60,7 +62,7 @@ const Button = (props: PropsWithChildren<Props>) => {
     children,
   } = props;
 
-  const styles = createStyles(color, textColor, iconColor, size, variant, rounded);
+  const styles = createStyles(color, textColor, iconColor, size, variant, rounded, justify);
 
   return (
     <Pressable
@@ -97,6 +99,7 @@ const createStyles = (
   size: Props["size"] = "medium",
   variant: Props["variant"] = "contained",
   rounded: boolean,
+  justify: Props["justify"],
 ) => {
   const sizeStyles = createSizeStyles()[size];
   const variantStyles = createVariantStyles(color)[variant];
@@ -108,6 +111,7 @@ const createStyles = (
     pressable: {
       flexDirection: "row",
       alignItems: "center",
+      justifyContent: justify,
 
       borderStyle: "solid",
       borderWidth: 2,

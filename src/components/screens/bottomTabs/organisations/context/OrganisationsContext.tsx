@@ -7,7 +7,7 @@ import useGetInvites from "@api/users/hooks/useGetInvites";
 import { useFocusEffect } from "@react-navigation/native";
 import useGetOrganisationMembers from "@api/organisations/members/hooks/useGetOrganisationMembers";
 import { OrganisationsMembersGetAll } from "@shared/ts/api/organisations";
-import { RequestInputs } from "@src/../../auto-cask-shared/ts/api/generic";
+import { RequestInputs } from "@shared/ts/api/generic";
 
 interface OrganisationsContextType {
   memberships: UseRequestReturn<RequestInputs<UserGetMemberships>, UserGetMemberships["res"]>;

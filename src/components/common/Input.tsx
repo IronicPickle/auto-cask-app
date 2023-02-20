@@ -17,6 +17,9 @@ interface Props {
   variant?: "contained" | "outlined" | "flat";
   size?: "extra-small" | "small" | "medium" | "large" | "extra-large";
 
+  rounded?: boolean;
+  justify?: ViewStyle["justifyContent"];
+
   name?: string;
   value: string;
   type?: TextInputProps["textContentType"];
@@ -46,6 +49,9 @@ const Input = (props: Props) => {
     variant = "contained",
     size = "medium",
 
+    rounded = false,
+    justify,
+
     name,
     value,
     type,
@@ -66,7 +72,7 @@ const Input = (props: Props) => {
     onChange = () => {},
   } = props;
 
-  const styles = createStyles(color, textColor, iconColor, size, variant);
+  const styles = createStyles(color, textColor, iconColor, size, variant, rounded, justify);
 
   return (
     <View style={[styles.view, disabled && styles.disabled, style]} {...viewProps}>
@@ -105,6 +111,8 @@ const createStyles = (
   iconColor: UIColor,
   size: Props["size"] = "medium",
   variant: Props["variant"] = "contained",
+  rounded: boolean,
+  justify: Props["justify"],
 ) => {
   const sizeStyles = createSizeStyles()[size];
   const variantStyles = createVariantStyles(color)[variant];
@@ -117,9 +125,12 @@ const createStyles = (
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
+      justifyContent: justify,
 
       borderStyle: "solid",
       borderWidth: 2,
+
+      ...(rounded ? { borderRadius: 100 } : {}),
 
       ...sizeStyles.view,
       ...variantStyles.view,

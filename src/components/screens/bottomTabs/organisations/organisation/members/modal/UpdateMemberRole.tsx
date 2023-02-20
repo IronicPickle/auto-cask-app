@@ -1,4 +1,4 @@
-import useUpdateOrganisationMembersRole from "@api/organisations/members/hooks/useUpdateOrganisationMembersRole";
+import useUpdateOrganisationMembersRole from "@api/organisations/members/role/hooks/useUpdateOrganisationMembersRole";
 import Select from "@components/common/Select";
 import FormEntry from "@components/form/FormEntry";
 import FormError from "@components/form/FormError";

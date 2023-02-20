@@ -15,6 +15,7 @@ import OrganisationPumpList from "./pumps/list/OrganisationPumpList";
 import RemoveOrganisationButton from "./RemoveOrganisationButton";
 import UpdateOrganisationButton from "./UpdateOrganisationButton";
 import OrganisationMemberList from "./members/list/OrganisationMemberList";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface Props extends StackScreenProps<OrganisationsStackParamList, "Organisation"> {}
 
@@ -35,7 +36,7 @@ const Organisation = (props: Props) => {
     useCallback(() => {
       memberships.send({});
       organisationMembers.send({
-        organisationId,
+        params: { organisationId },
       });
     }, []),
   );
@@ -49,7 +50,7 @@ const Organisation = (props: Props) => {
   const canViewPumps = permissionChecker.canViewPumps(self.data?._id);
 
   return (
-    <View style={styles.wrapper}>
+    <ScrollView style={styles.wrapper}>
       <View style={styles.details}>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
@@ -79,7 +80,7 @@ const Organisation = (props: Props) => {
       {canViewPumps && <OrganisationPumpList organisation={membership.organisation} />}
       {canViewMembers && <OrganisationMemberList organisation={membership.organisation} />}
       {canViewInvites && <OrganisationInviteList organisation={membership.organisation} />}
-    </View>
+    </ScrollView>
   );
 };
 

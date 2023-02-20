@@ -1,6 +1,6 @@
 import { api } from "@api/api";
 import type { OrganisationsPumpsCreate } from "@shared/ts/api/organisations";
-import { RequestInputs } from "@src/../../auto-cask-shared/ts/api/generic";
+import { RequestInputs } from "@shared/ts/api/generic";
 
 export default async ({
   params: { organisationId },
