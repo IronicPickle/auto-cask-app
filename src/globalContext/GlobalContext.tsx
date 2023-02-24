@@ -1,10 +1,13 @@
+import { SessionTokens } from "@api/api";
 import { UseRequestReturn } from "@api/hooks/useRequest";
-import { UserGetSelfReq, UserGetSelfRes } from "@shared/ts/api/user";
+import { RequestInputs } from "@shared/ts/api/generic";
+import { UserGetSelf } from "@shared/ts/api/users";
 import { createContext, PropsWithChildren } from "react";
 import useSession from "./hooks/useSession";
 
 interface GlobalContextType {
-  self: UseRequestReturn<UserGetSelfReq, UserGetSelfRes | undefined>;
+  self: UseRequestReturn<RequestInputs<UserGetSelf>, UserGetSelf["res"] | undefined>;
+  sessionTokens: SessionTokens | null;
 
   logout: () => void;
 }
@@ -14,7 +17,11 @@ export const GlobalContext = createContext<GlobalContextType>({} as GlobalContex
 export default function GlobalContextProvider(props: PropsWithChildren<{}>) {
   const { children } = props;
 
-  const { self, logout } = useSession();
+  const { self, sessionTokens, logout } = useSession();
 
-  return <GlobalContext.Provider value={{ self, logout }}>{children}</GlobalContext.Provider>;
+  return (
+    <GlobalContext.Provider value={{ self, sessionTokens, logout }}>
+      {children}
+    </GlobalContext.Provider>
+  );
 }

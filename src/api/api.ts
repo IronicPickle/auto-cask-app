@@ -74,7 +74,7 @@ const refreshAccessToken = async () => {
     if (await checkTokenHasExpired(refreshToken)) return null;
 
     const { accessToken } = await refresh({
-      refreshToken,
+      body: { refreshToken },
     });
     return accessToken;
   } catch (err) {

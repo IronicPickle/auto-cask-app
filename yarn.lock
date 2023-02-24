@@ -6057,6 +6057,11 @@
   "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.14.tgz"
   "version" "0.71.14"
 
+"react-native-image-picker@^5.1.0":
+  "integrity" "sha512-p506trG3PDSrdm+Yd0QolsnR3FtSe37gkP7OVsMa9UYwn1teaLGzhmx3QMZ4ZBwdV1AKBUFA5HF1ECAVSDTdQQ=="
+  "resolved" "https://registry.npmjs.org/react-native-image-picker/-/react-native-image-picker-5.1.0.tgz"
+  "version" "5.1.0"
+
 "react-native-pure-jwt@^3.0.1":
   "integrity" "sha512-hc65Bm8vhDD8VwJAv36GIsPOI9zmlVm2gWXv42VrMiwRB1BxtloOoIF80THGVW6d4zufgTEdt92jkMQLrHsf6g=="
   "resolved" "https://registry.npmjs.org/react-native-pure-jwt/-/react-native-pure-jwt-3.0.1.tgz"

@@ -2,35 +2,44 @@ import { Badge } from "@shared/ts/api/generic";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useState } from "react";
 import Button from "@components/common/Button";
-import UseBadgeModal from "./use/UseBadgeModal";
 import { StyleSheet } from "react-native";
+import UpdateBadgeImageModal from "./modal/UpdateBadgeImageModal";
+import useGlobalContext from "@src/globalContext/hooks/useGlobalContext";
 
 interface Props {
   badge: Badge;
+  onClose: () => void;
 }
 
-const UseBadgeButton = (props: Props) => {
-  const { badge } = props;
+const UpdateBadgeImageButton = (props: Props) => {
+  const { badge, onClose } = props;
+
+  const { self } = useGlobalContext();
 
   const [modalActive, setModalActive] = useState(false);
+
+  const canUpdate = badge.createdBy._id === self.data?._id;
+
+  if (!canUpdate) return null;
 
   return (
     <>
       <Button
         size="medium"
-        color="green"
+        color="blue"
         onPress={() => setModalActive(true)}
-        endIcon={<Icon name="beer" />}
+        endIcon={<Icon name="image" />}
         justify="center"
         style={styles.button}
       >
-        Use Badge
+        Update Image
       </Button>
 
-      <UseBadgeModal
+      <UpdateBadgeImageModal
         badge={modalActive ? badge : undefined}
         onClose={() => {
           setModalActive(false);
+          onClose();
         }}
       />
     </>
@@ -43,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UseBadgeButton;
+export default UpdateBadgeImageButton;

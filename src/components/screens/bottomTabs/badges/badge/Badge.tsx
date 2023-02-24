@@ -1,15 +1,19 @@
 import TextWrapper from "@components/common/TextWrapper";
+import config from "@config/config";
+import useForceRerender from "@hooks/useForceRerender";
 import { colors } from "@lib/constants/colors";
+import { generateBadgeImageUrl } from "@lib/utils/generic";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 import dayjs from "dayjs";
 import { useCallback } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { BadgesStackParamList } from "../BadgesStackNavigator";
 import useBadgesContext from "../context/useBadgesContext";
 import DeleteBadgeButton from "./DeleteBadgeButton";
 import UpdateBadgeButton from "./UpdateBadgeButton";
+import UpdateBadgeImageButton from "./UpdateBadgeImageButton";
 import UseBadgeButton from "./UseBadgeButton";
 
 interface Props extends StackScreenProps<BadgesStackParamList, "Badge"> {}
@@ -18,6 +22,8 @@ const Badge = (props: Props) => {
   const { route } = props;
 
   const { badges } = useBadgesContext();
+
+  const [imageKey, reloadImage] = useForceRerender();
 
   const { badgeId } = route.params;
 
@@ -31,7 +37,7 @@ const Badge = (props: Props) => {
 
   if (!badge) return null;
 
-  const { name, breweryName, createdBy, createdOn } = badge;
+  const { _id, name, breweryName, createdBy, createdOn } = badge;
 
   return (
     <ScrollView style={styles.wrapper}>
@@ -58,7 +64,17 @@ const Badge = (props: Props) => {
         <Text style={styles.value}>{createdBy.displayName}</Text>
       </View>
 
+      <Image
+        key={imageKey}
+        source={{
+          uri: generateBadgeImageUrl(_id),
+        }}
+        resizeMode="contain"
+        style={styles.image}
+      />
+
       <View style={styles.options}>
+        <UpdateBadgeImageButton badge={badge} onClose={reloadImage} />
         <UseBadgeButton badge={badge} />
       </View>
     </ScrollView>
@@ -115,7 +131,17 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
+  image: {
+    height: 300,
+
+    paddingHorizontal: 32,
+  },
+
   options: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 16,
+
     padding: 32,
   },
 });

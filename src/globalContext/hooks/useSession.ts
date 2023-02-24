@@ -17,7 +17,7 @@ const useSession = () => {
     remove();
   };
 
-  return { self, logout };
+  return { self, sessionTokens, logout };
 };
 
 export default useSession;
