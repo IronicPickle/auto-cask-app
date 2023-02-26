@@ -23,6 +23,12 @@ const PumpSelectList = (props: Props) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (pumps.data.length === 1) onSelect(pumps.data[0]._id);
+  }, [pumps.data]);
+
+  if (pumps.data.length === 1) return null;
+
   return (
     <View style={styles.wrapper}>
       <DataCheck

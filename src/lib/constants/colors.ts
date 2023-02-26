@@ -10,4 +10,5 @@ export const colors = {
   orange: "rgba(247,127,0, 1)", // #F77F00
   teal: "rgba(42,157,143,1)", // #2A9D8F
   blue: "rgba(22,99,190,1)", // #1663BE
+  yellow: "rgba(253,218,22,1)", // #FDDA16
 };

@@ -1,13 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationProp, NavigatorScreenParams, useNavigation } from "@react-navigation/native";
-import { BottomTabsParamList } from "@src/BottomTabsNavigator";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import Organisation from "./organisation/Organisation";
 import OrganisationsContextProvider from "./context/OrganisationsContext";
 import OrganisationList from "./list/OrganisationList";
 
 export type OrganisationsStackParamList = {
-  OrganisationList: NavigatorScreenParams<BottomTabsParamList>;
+  OrganisationList: undefined;
   Organisation: {
     organisationId: string;
   };

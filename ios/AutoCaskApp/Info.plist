@@ -59,5 +59,11 @@
 	</array>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>This is requried in order to discover Badge Clients on the local network.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This is required to save QR Codes to your photo library.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This is required to save QR Codes to your photo library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This is required to scan QR codes.</string>
 </dict>
 </plist>

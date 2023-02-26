@@ -12,6 +12,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { BadgesStackParamList } from "../BadgesStackNavigator";
 import useBadgesContext from "../context/useBadgesContext";
 import DeleteBadgeButton from "./DeleteBadgeButton";
+import GetQrcodeButton from "./GetQrcodeButton";
 import UpdateBadgeButton from "./UpdateBadgeButton";
 import UpdateBadgeImageButton from "./UpdateBadgeImageButton";
 import UseBadgeButton from "./UseBadgeButton";
@@ -25,7 +26,7 @@ const Badge = (props: Props) => {
 
   const [imageKey, reloadImage] = useForceRerender();
 
-  const { badgeId } = route.params;
+  const { badgeId, autoUse } = route.params;
 
   const badge = badges.data.find(({ _id }) => _id === badgeId);
 
@@ -75,7 +76,8 @@ const Badge = (props: Props) => {
 
       <View style={styles.options}>
         <UpdateBadgeImageButton badge={badge} onClose={reloadImage} />
-        <UseBadgeButton badge={badge} />
+        <UseBadgeButton badge={badge} autoUse={autoUse} />
+        <GetQrcodeButton badge={badge} />
       </View>
     </ScrollView>
   );
@@ -139,6 +141,7 @@ const styles = StyleSheet.create({
 
   options: {
     display: "flex",
+    flexWrap: "wrap",
     flexDirection: "row",
     gap: 16,
 

@@ -59,7 +59,7 @@ const UpdateBadgeModal = (props: Props) => {
     });
   }, [badge]);
 
-  const changesMade = values.name !== name && values.breweryName !== breweryName;
+  const changesMade = values.name !== name || values.breweryName !== breweryName;
 
   return (
     <Modal active={!!badge} onClose={onClose}>

@@ -1,16 +1,19 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-
+import { NavigationProp, NavigatorScreenParams, useNavigation } from "@react-navigation/native";
 import Home from "@screens/bottomTabs/home/Home";
 import Profile from "@screens/bottomTabs/profile/Profile";
-import OrganisationsStackNavigator from "@screens/bottomTabs/organisations/OrganisationsStackNavigator";
-import BadgesStackNavigator from "@screens/bottomTabs/badges/BadgesStackNavigator";
+import OrganisationsStackNavigator, {
+  OrganisationsStackParamList,
+} from "@screens/bottomTabs/organisations/OrganisationsStackNavigator";
+import BadgesStackNavigator, {
+  BadgesStackParamList,
+} from "@screens/bottomTabs/badges/BadgesStackNavigator";
 
 export type BottomTabsParamList = {
   Home: undefined;
-  OrganisationsStack: undefined;
-  BadgesStack: undefined;
+  OrganisationsStack: NavigatorScreenParams<OrganisationsStackParamList>;
+  BadgesStack: NavigatorScreenParams<BadgesStackParamList>;
   Profile: undefined;
 };
 

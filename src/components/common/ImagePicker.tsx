@@ -2,7 +2,7 @@ import { colors } from "@lib/constants/colors";
 import { ChangeData } from "@lib/ts/form";
 import { UIColor } from "@lib/ts/generic";
 import { rgba } from "@lib/utils/generic";
-import { Image, Text, View } from "react-native";
+import { ActivityIndicator, Image, Text, View } from "react-native";
 import { Pressable, PressableProps } from "react-native";
 import { StyleProp, StyleSheet } from "react-native";
 import { launchImageLibrary } from "react-native-image-picker";
@@ -89,7 +89,11 @@ const ImagePicker = (props: Props) => {
         />
       )}
       <View style={styles.ctaWrapper}>
-        <Icon name="image" style={styles.icon} />
+        {isLoading ? (
+          <ActivityIndicator color={colors[iconColor]} size={styles.icon.fontSize} />
+        ) : (
+          <Icon name="image" style={styles.icon} />
+        )}
         <Text style={styles.text}>Tap to change</Text>
       </View>
     </Pressable>
@@ -143,7 +147,7 @@ const createStyles = (
     },
     icon: {
       color: colors[iconColor],
-      fontSize: 18,
+      fontSize: 22,
       ...variantStyles.icon,
     },
     text: {

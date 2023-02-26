@@ -84,6 +84,7 @@ const UpdateBadgeImageModal = (props: Props) => {
                 value={values.image}
                 onChange={onChange}
                 placeholderSrc={badge ? generateBadgeImageUrl(badge?._id) : undefined}
+                isLoading={updateBadgeImage.isLoading}
               />
             </FormEntry>
           </FormRow>

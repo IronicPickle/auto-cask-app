@@ -1,11 +1,11 @@
 import React from "react";
-import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import QRCodeScannerWrapper from "./qrcodeScanner/QRCodeScannerWrapper";
 
 const Home = () => {
   return (
     <SafeAreaView style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home screen</Text>
+      <QRCodeScannerWrapper />
     </SafeAreaView>
   );
 };

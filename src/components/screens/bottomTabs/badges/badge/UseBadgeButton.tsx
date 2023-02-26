@@ -7,12 +7,13 @@ import { StyleSheet } from "react-native";
 
 interface Props {
   badge: Badge;
+  autoUse?: boolean;
 }
 
 const UseBadgeButton = (props: Props) => {
-  const { badge } = props;
+  const { badge, autoUse } = props;
 
-  const [modalActive, setModalActive] = useState(false);
+  const [modalActive, setModalActive] = useState(autoUse);
 
   return (
     <>

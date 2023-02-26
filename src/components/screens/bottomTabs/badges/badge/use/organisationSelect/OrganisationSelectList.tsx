@@ -2,7 +2,7 @@ import useGetMemberships from "@api/users/hooks/useGetMemberships";
 import DataCheck from "@components/common/DataCheck";
 import { useFocusEffect } from "@react-navigation/native";
 import { isEmpty } from "@shared/utils/generic";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import OrganisationSelectListItem from "./OrganisationSelectListItem";
 
@@ -20,6 +20,12 @@ const OrganisationSelectList = (props: Props) => {
       memberships.send({});
     }, []),
   );
+
+  useEffect(() => {
+    if (memberships.data.length === 1) onSelect(memberships.data[0].organisation._id);
+  }, [memberships.data]);
+
+  if (memberships.data.length === 1) return null;
 
   return (
     <View style={styles.wrapper}>
