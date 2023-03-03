@@ -17,13 +17,13 @@ const ServiceListItem = (props: Props) => {
 
   const { self } = useGlobalContext();
 
-  const { name, fullName, host, port } = service;
+  const { name, fullName, addresses, port } = service;
 
   const fingerprint = useCreateFingerprint(undefined);
 
   const sendFingerprint = async () => {
     if (!self.data) return;
-    const url = `http://${host}:${port}`;
+    const url = `http://${addresses[0]}:${port}`;
     const res = await fingerprint.send({
       url,
       body: {

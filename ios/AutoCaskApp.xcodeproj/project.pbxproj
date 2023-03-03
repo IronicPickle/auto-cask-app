@@ -14,6 +14,22 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-AutoCaskApp-AutoCaskAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AutoCaskApp-AutoCaskAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		D820C75A29ABFAE800F5E02D /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C74929ABFAE800F5E02D /* Fontisto.ttf */; };
+		D820C75C29ABFAE800F5E02D /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C74A29ABFAE800F5E02D /* Octicons.ttf */; };
+		D820C75E29ABFAE800F5E02D /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C74B29ABFAE800F5E02D /* Feather.ttf */; };
+		D820C76029ABFAE800F5E02D /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C74C29ABFAE800F5E02D /* Entypo.ttf */; };
+		D820C76229ABFAE800F5E02D /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C74D29ABFAE800F5E02D /* FontAwesome5_Brands.ttf */; };
+		D820C76429ABFAE800F5E02D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C74E29ABFAE800F5E02D /* MaterialCommunityIcons.ttf */; };
+		D820C76629ABFAE800F5E02D /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C74F29ABFAE800F5E02D /* AntDesign.ttf */; };
+		D820C76829ABFAE800F5E02D /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75029ABFAE800F5E02D /* Foundation.ttf */; };
+		D820C76A29ABFAE800F5E02D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75129ABFAE800F5E02D /* Ionicons.ttf */; };
+		D820C76C29ABFAE800F5E02D /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75229ABFAE800F5E02D /* FontAwesome5_Solid.ttf */; };
+		D820C76E29ABFAE800F5E02D /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75329ABFAE800F5E02D /* FontAwesome5_Regular.ttf */; };
+		D820C77029ABFAE800F5E02D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75429ABFAE800F5E02D /* FontAwesome.ttf */; };
+		D820C77229ABFAE800F5E02D /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75529ABFAE800F5E02D /* Zocial.ttf */; };
+		D820C77429ABFAE800F5E02D /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75629ABFAE800F5E02D /* EvilIcons.ttf */; };
+		D820C77629ABFAE800F5E02D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75729ABFAE800F5E02D /* SimpleLineIcons.ttf */; };
+		D820C77829ABFAE800F5E02D /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D820C75829ABFAE800F5E02D /* MaterialIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +59,23 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-AutoCaskApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AutoCaskApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AutoCaskApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-AutoCaskApp-AutoCaskAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoCaskApp-AutoCaskAppTests.release.xcconfig"; path = "Target Support Files/Pods-AutoCaskApp-AutoCaskAppTests/Pods-AutoCaskApp-AutoCaskAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		D820C74929ABFAE800F5E02D /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		D820C74A29ABFAE800F5E02D /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		D820C74B29ABFAE800F5E02D /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		D820C74C29ABFAE800F5E02D /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		D820C74D29ABFAE800F5E02D /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		D820C74E29ABFAE800F5E02D /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		D820C74F29ABFAE800F5E02D /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		D820C75029ABFAE800F5E02D /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		D820C75129ABFAE800F5E02D /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		D820C75229ABFAE800F5E02D /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		D820C75329ABFAE800F5E02D /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		D820C75429ABFAE800F5E02D /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		D820C75529ABFAE800F5E02D /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		D820C75629ABFAE800F5E02D /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		D820C75729ABFAE800F5E02D /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		D820C75829ABFAE800F5E02D /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		D820C78A29AC0ABA00F5E02D /* AutoCaskApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = AutoCaskApp.entitlements; path = AutoCaskApp/AutoCaskApp.entitlements; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -86,6 +119,7 @@
 		13B07FAE1A68108700A75B9A /* AutoCaskApp */ = {
 			isa = PBXGroup;
 			children = (
+				D820C78A29AC0ABA00F5E02D /* AutoCaskApp.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -116,6 +150,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D820C74829ABFAE800F5E02D /* Fonts */,
 				13B07FAE1A68108700A75B9A /* AutoCaskApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* AutoCaskAppTests */,
@@ -146,6 +181,30 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-AutoCaskApp-AutoCaskAppTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D820C74829ABFAE800F5E02D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D820C74929ABFAE800F5E02D /* Fontisto.ttf */,
+				D820C74A29ABFAE800F5E02D /* Octicons.ttf */,
+				D820C74B29ABFAE800F5E02D /* Feather.ttf */,
+				D820C74C29ABFAE800F5E02D /* Entypo.ttf */,
+				D820C74D29ABFAE800F5E02D /* FontAwesome5_Brands.ttf */,
+				D820C74E29ABFAE800F5E02D /* MaterialCommunityIcons.ttf */,
+				D820C74F29ABFAE800F5E02D /* AntDesign.ttf */,
+				D820C75029ABFAE800F5E02D /* Foundation.ttf */,
+				D820C75129ABFAE800F5E02D /* Ionicons.ttf */,
+				D820C75229ABFAE800F5E02D /* FontAwesome5_Solid.ttf */,
+				D820C75329ABFAE800F5E02D /* FontAwesome5_Regular.ttf */,
+				D820C75429ABFAE800F5E02D /* FontAwesome.ttf */,
+				D820C75529ABFAE800F5E02D /* Zocial.ttf */,
+				D820C75629ABFAE800F5E02D /* EvilIcons.ttf */,
+				D820C75729ABFAE800F5E02D /* SimpleLineIcons.ttf */,
+				D820C75829ABFAE800F5E02D /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +294,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D820C75C29ABFAE800F5E02D /* Octicons.ttf in Resources */,
+				D820C76829ABFAE800F5E02D /* Foundation.ttf in Resources */,
+				D820C77629ABFAE800F5E02D /* SimpleLineIcons.ttf in Resources */,
+				D820C76A29ABFAE800F5E02D /* Ionicons.ttf in Resources */,
+				D820C77429ABFAE800F5E02D /* EvilIcons.ttf in Resources */,
+				D820C76E29ABFAE800F5E02D /* FontAwesome5_Regular.ttf in Resources */,
+				D820C77229ABFAE800F5E02D /* Zocial.ttf in Resources */,
+				D820C76029ABFAE800F5E02D /* Entypo.ttf in Resources */,
+				D820C77829ABFAE800F5E02D /* MaterialIcons.ttf in Resources */,
+				D820C76629ABFAE800F5E02D /* AntDesign.ttf in Resources */,
+				D820C76C29ABFAE800F5E02D /* FontAwesome5_Solid.ttf in Resources */,
+				D820C75A29ABFAE800F5E02D /* Fontisto.ttf in Resources */,
+				D820C75E29ABFAE800F5E02D /* Feather.ttf in Resources */,
+				D820C76429ABFAE800F5E02D /* MaterialCommunityIcons.ttf in Resources */,
+				D820C76229ABFAE800F5E02D /* FontAwesome5_Brands.ttf in Resources */,
+				D820C77029ABFAE800F5E02D /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +508,7 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-AutoCaskApp-AutoCaskAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 2HVMXMD8DX;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -461,6 +537,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 2HVMXMD8DX;
 				INFOPLIST_FILE = AutoCaskAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -485,9 +562,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = AutoCaskApp/AutoCaskApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2HVMXMD8DX;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AutoCaskApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Auto Cask";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -512,8 +593,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = AutoCaskApp/AutoCaskApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2HVMXMD8DX;
 				INFOPLIST_FILE = AutoCaskApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Auto Cask";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -564,7 +649,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -598,6 +683,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -635,7 +721,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -661,6 +747,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
